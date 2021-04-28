@@ -1,0 +1,12 @@
+Synthetic dataset
+
+Number of features: 2
+Number of clusters: 3
+
+Centroids of the clusters:
+Cluster 1: 13.000000 18.000000
+Cluster 2: 8.000000 7.000000
+Cluster 3: 20.000000 11.000000
+
+Number of train patterns: 150
+Number of test patterns: 150

@@ -1,0 +1,105 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Test SVM as a wrapper classifier
+
+# Use the simple EA
+state  = ec.simple.SimpleEvolutionState
+init   = ec.simple.SimpleInitializer
+finish = ec.simple.SimpleFinisher
+exch   = ec.simple.SimpleExchanger
+eval   = ec.simple.SimpleEvaluator
+breed  = ec.simple.SimpleBreeder
+pop    = ec.Population
+
+# run for 100 generations, quit prematurely if I find something ideal
+generations          = 1000
+quit-on-run-complete = true
+
+# Only one thread
+evalthreads  = auto
+breedthreads = auto
+
+# Random seed
+seed.0 = time
+
+# Only one population of 100 individuals
+pop.subpops  = 1
+pop.subpop.0 = ec.Subpopulation
+pop.subpop.0.size = 100
+# don't bother trying to eliminate duplicates from the initial population
+pop.subpop.0.duplicate-retries = 0
+
+# Individuals representation
+pop.subpop.0.species = ec.vector.FloatVectorSpecies
+pop.subpop.0.species.ind = ec.vector.DoubleVectorIndividual
+
+# Minimum and maximum values for the parameters
+pop.subpop.0.species.min-gene = 0
+pop.subpop.0.species.max-gene = 40000
+
+# Genome size
+pop.subpop.0.species.genome-size = 2
+
+# Breeding pipeline
+pop.subpop.0.species.pipe					= ec.vector.breed.VectorMutationPipeline
+pop.subpop.0.species.pipe.source.0			= ec.vector.breed.VectorCrossoverPipeline
+pop.subpop.0.species.pipe.source.0.source.0	= ec.select.TournamentSelection
+pop.subpop.0.species.pipe.source.0.source.1	= same
+select.tournament.size						= 2
+
+# Crossover
+pop.subpop.0.species.crossover-type					= sbx
+pop.subpop.0.species.crossover-distribution-index	= 20
+
+# Mutation
+pop.subpop.0.species.alternative-polynomial-version	= true
+pop.subpop.0.species.out-of-bounds-retries			= 20
+pop.subpop.0.species.mutation-type					= polynomial
+pop.subpop.0.species.mutation-distribution-index	= 20
+pop.subpop.0.species.mutation-bounded				= true
+pop.subpop.0.species.mutation-prob					= 0.1
+
+# Use simple fitness
+pop.subpop.0.species.fitness = ec.simple.SimpleFitness
+
+
+# The fitness (kappa index for validation data) should be maximized
+pop.subpop.0.species.fitness.maximize = true
+
+# To solve classification problem with LibSVM
+eval.problem = tests.testLibSVM.TestLibSVM
+eval.problem.dataset = ../../datasets/dummy/train.data
+eval.problem.dataset.class-index = 2
+eval.problem.validation-prop = 0.3
+
+# Output stats
+stat       = ec.simple.SimpleStatistics
+stat.file  = $out.stat
+stat.do-final = false
+
+# We're not writing checkpoint files.  If we were, we'd do it every
+# generation, and the prefix to all the files would be "ec.*"
+checkpoint        = false
+checkpoint-modulo = 1
+checkpoint-prefix = ec

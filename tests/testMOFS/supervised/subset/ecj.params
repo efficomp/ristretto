@@ -1,0 +1,48 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Use the subset representation
+
+# The rest of parameters are common for all the experiments
+parent.0 =				../ecj.params
+
+# Individuals representation
+pop.subpop.0.species     = ristretto.problem.fs.subset.FSSubsetSpecies
+pop.subpop.0.species.ind = ristretto.problem.fs.subset.FSSubsetIndividual
+
+# Individuals
+fs.subset.species.n-features = 27
+fs.subset.species.min-size = 1
+fs.subset.species.max-size = 10
+
+# Breeding pipeline
+pop.subpop.0.species.pipe					= ristretto.problem.fs.subset.breed.FSSubsetMutationPipeline
+pop.subpop.0.species.pipe.source.0			= ristretto.problem.fs.subset.breed.FSSubsetCrossoverPipeline
+
+# Mutation
+fs.subset.species.mutation-prob = 0.01
+
+# To solve a feature selection problem
+eval.problem = ristretto.problem.fs.subset.supervised.FSSubsetSupervisedProblem
+
+

@@ -1,0 +1,55 @@
+# Configuration files
+.classpath
+.project
+.settings
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Data files
+*.data
+*.stat
+
+# Graph results
+*.png
+
+# Matlab data
+*.mat
+
+# Allow zipand png in docs
+!docs/*.zip
+!docs/**/*.png
+
+# Fronts for testFSParetoFrontAnalyzer
+!tests/testFSParetoFrontAnalyzer/front*.stat
+
+# Relevances for testFSRelevancesAnalyzer
+!tests/testFSRelevancesAnalyzer/relevance?.data
+tests/testFSRelevancesAnalyzer/relevances.data
+
+# Results of testLexCoevFS
+tests/testLexCoevFS/**/test*
+!tests/testLexCoevFS/**/test.mk
+!tests/testLexCoevFS/test*
+
+# Results of testMOFS
+tests/testMOFS/**/test*
+!tests/testMOFS/**/test.mk
+!tests/testMOFS/**/subset/test*
+
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+

@@ -1,0 +1,47 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Configuration for the classifier species of pop.subpop.1
+pop.subpop.1      =	ec.Subpopulation
+pop.subpop.1.size = 200
+pop.subpop.1.duplicate-retries = 0
+
+pop.subpop.1.species     = ristretto.problem.fs.subset.FSSubsetSpecies
+pop.subpop.1.species.ind = ristretto.problem.fs.subset.FSSubsetIndividual
+pop.subpop.1.species.n-features = 27
+pop.subpop.1.species.min-size = 0
+pop.subpop.1.species.max-size = 27
+pop.subpop.1.species.min-feature = 0
+pop.subpop.1.species.max-feature = 27
+
+pop.subpop.1.species.pipe          = ristretto.problem.fs.subset.breed.FSSubsetMutationPipeline
+pop.subpop.1.species.pipe.source.0 = ristretto.problem.fs.subset.breed.FSSubsetCrossoverPipeline
+
+pop.subpop.1.species.pipe.source.0.source.0	= ec.select.TournamentSelection
+pop.subpop.1.species.pipe.source.0.source.1	= same
+
+pop.subpop.1.species.fitness = ristretto.ecjtools.LexicographicFitness
+
+# Variation operators and rates
+pop.subpop.1.species.mutation-prob = 0.01
+

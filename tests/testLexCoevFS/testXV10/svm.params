@@ -1,0 +1,61 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Configuration for the classifier species
+pop.subpop.0      =	ec.Subpopulation
+pop.subpop.0.size = 150
+pop.subpop.0.duplicate-retries = 0
+
+pop.subpop.0.species = ec.vector.FloatVectorSpecies
+pop.subpop.0.species.ind = ec.vector.DoubleVectorIndividual
+
+# Only two parameters, C and Gamma
+pop.subpop.0.species.genome-size = 2
+
+# Limits for the penalty parameter C
+pop.subpop.0.species.min-gene = 0
+pop.subpop.0.species.max-gene = 40000
+
+# Limits for the width of RBFs (gamma)
+pop.subpop.0.species.min-gene.1 = 0
+pop.subpop.0.species.max-gene.1 = 16
+
+pop.subpop.0.species.pipe					= ec.vector.breed.VectorMutationPipeline
+pop.subpop.0.species.pipe.source.0			= ec.vector.breed.VectorCrossoverPipeline
+
+pop.subpop.0.species.pipe.source.0.source.0	= ec.select.TournamentSelection
+pop.subpop.0.species.pipe.source.0.source.1	= same
+
+pop.subpop.0.species.fitness = ristretto.ecjtools.LexicographicFitness
+
+# Variation operators and rates
+pop.subpop.0.species.crossover-type					= sbx
+pop.subpop.0.species.crossover-distribution-index	= 20
+
+pop.subpop.0.species.mutation-type					= polynomial
+pop.subpop.0.species.mutation-distribution-index	= 20
+pop.subpop.0.species.alternative-polynomial-version	= true
+pop.subpop.0.species.out-of-bounds-retries			= 20
+pop.subpop.0.species.mutation-bounded				= true
+pop.subpop.0.species.mutation-prob = 0.05
+

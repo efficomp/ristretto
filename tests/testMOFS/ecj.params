@@ -1,0 +1,78 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Test of NSGA2 to solve feature selection problems
+
+# Use the NSGA2 algorithm
+state                        = ec.simple.SimpleEvolutionState
+init                         = ec.simple.SimpleInitializer
+finish                       = ec.simple.SimpleFinisher
+exch                         = ec.simple.SimpleExchanger
+eval                         = ec.multiobjective.nsga2.NSGA2Evaluator
+breed                        = ec.multiobjective.nsga2.NSGA2Breeder
+pop                          = ec.Population
+
+# Configure the number of generations = 100
+generations = 100
+quit-on-run-complete = true
+
+# Only one thread
+evalthreads  = 1
+breedthreads = 1
+
+# Random seed
+seed.0 = time
+
+# Only one population
+pop.subpops  = 1
+pop.subpop.0 = ec.Subpopulation
+pop.subpop.0.size = 200
+
+# don't bother trying to eliminate duplicates from the initial population
+pop.subpop.0.duplicate-retries = 0
+
+# Breeding pipeline
+pop.subpop.0.species.pipe.source.0.source.0	= ec.select.TournamentSelection
+pop.subpop.0.species.pipe.source.0.source.1	= same
+select.tournament.size						= 2
+
+# There are two objective functions
+pop.subpop.0.species.fitness = ec.multiobjective.nsga2.NSGA2MultiObjectiveFitness
+multi.fitness.num-objectives = 2
+
+# Feature selection problem
+#eval.problem.debug = true
+eval.problem.dataset = training.data
+eval.problem.dataset.class-index = 27
+
+# Output stats
+stat       = ristretto.ecjtools.MultiObjectiveStatistics
+stat.file  = $out.stat
+stat.front = $front.stat
+
+# We're not writing checkpoint files.  If we were, we'd do it every
+# generation, and the prefix to all the files would be "ec.*"
+checkpoint        = false
+checkpoint-modulo = 1
+checkpoint-prefix = ec
+

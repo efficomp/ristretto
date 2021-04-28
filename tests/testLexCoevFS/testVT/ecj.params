@@ -1,0 +1,103 @@
+#
+# This file is part of Ristretto.
+#
+# Ristretto is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option)
+# any later version.
+#
+# Ristretto is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+# more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Ristretto. If not, see <http://www.gnu.org/licenses/>.
+#
+# This work was supported by project TIN2015-67020-P (Spanish "Ministerio de
+# Economía y Competitividad"), and by the European Regional Development Fund
+# (ERDF).
+#
+# Copyright (c) 2018, EFFICOMP
+#
+
+# Test of coevolution to solve feature selection problems
+
+# Use simple coevolution
+state  = ec.simple.SimpleEvolutionState
+init   = ec.simple.SimpleInitializer
+finish = ec.simple.SimpleFinisher
+exch   = ec.simple.SimpleExchanger
+eval   = ec.coevolve.MultiPopCoevolutionaryEvaluator
+breed  = ec.simple.SimpleBreeder
+
+# Configure the number of generations = 100
+generations = 100
+quit-on-run-complete = true
+
+# Use all the CPUs
+evalthreads  = auto
+breedthreads = auto
+
+# Random seed
+seed.0 = time
+
+# Parameters for coevolution
+eval.num-elites        = 0
+eval.num-shuffled      = 2
+eval.num-current       = 0
+eval.num-prev          = 0
+eval.select-prev       = ec.select.RandomSelection
+eval.select-current    = ec.select.RandomSelection
+select.tournament.size = 2
+
+# Feature selection problem
+#eval.problem.debug = true
+eval.problem = ristretto.problem.fs.subset.supervised.FSSubsetSupervisedCoevolutionaryProblem
+eval.problem.dataset = training.data
+eval.problem.dataset.class-index = 27
+eval.problem.validation-prop = 0.33
+eval.problem.evaluation-mode = validation-training
+#eval.problem.folds = 5
+
+# Deatils of the lexicographic fitness
+lexicographic.fitness.threshold = 0.001
+
+# Four components
+lexicographic.fitness.num-objectives = 4
+
+# The most important objective will be the validation kappa index
+lexicographic.fitness.maximize.0 = true
+lexicographic.fitness.max.0 = 1
+lexicographic.fitness.min.0 = 0
+
+# The second objective will be the training kappa index
+lexicographic.fitness.maximize.1 = true
+lexicographic.fitness.max.1 = 1
+lexicographic.fitness.min.1 = 0
+
+# The third objective to be taken into account will be the number of selected features
+lexicographic.fitness.maximize.2 = false
+lexicographic.fitness.max.2 = 10000000000
+lexicographic.fitness.min.2 = 0
+
+# The fourth and last objective to be taken into account will be the value of the SVM regularization parameter (C)
+lexicographic.fitness.maximize.3 = false
+lexicographic.fitness.max.3 = 10000000000
+lexicographic.fitness.min.3 = 0
+
+# Output stats
+stat   = ristretto.ecjtools.CoevolutionaryStatistics
+stat.file  = $out.stat
+
+# We're not writing checkpoint files.  If we were, we'd do it every
+# generation, and the prefix to all the files would be "ec.*"
+checkpoint        = false
+checkpoint-modulo = 1
+checkpoint-prefix = ec
+
+# The first subpopulation will evolve the classifier, while the remaining ones will be used for feature selection
+pop                = ec.Population
+pop.subpops = 8
+pop.default-subpop = 1
+
