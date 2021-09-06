@@ -8,7 +8,7 @@ It provides an individual representation based on subsets of selected features a
 
 Ristretto requires Java SE 7 or above. It also depends on the following Java libraries:
 
-* [ECJ](https://cs.gmu.edu/~eclab/projects/ecj/),
+* [ECJ](https://cs.gmu.edu/~eclab/projects/ecj/) (version 24),
 * [Java-ML](http://java-ml.sourceforge.net/),
 * [Apache Commons Math](https://commons.apache.org/proper/commons-math/), and
 * [LIBSVM](https://www.csie.ntu.edu.tw/~cjlin/libsvm/), if SVM classifiers are desired
