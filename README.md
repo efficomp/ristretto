@@ -44,4 +44,8 @@ This work was supported by project *Energy-aware High Performance Multi-objectiv
 
 ## License
 
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.md) © 2015-2018 [EFFICOMP](https://efficomp.ugr.es).
+[GPLv3](https://www.gnu.org/licenses/gpl-3.0.md)
+
+## Copyright
+
+Ristretto © 2015 [EFFICOMP](https://efficomp.ugr.es).
