@@ -44,7 +44,7 @@ This work was supported by project *Energy-aware High Performance Multi-objectiv
 
 ## License
 
-[GPLv3](https://www.gnu.org/licenses/gpl-3.0.md)
+[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.md).
 
 ## Copyright
 
