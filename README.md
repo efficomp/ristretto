@@ -27,7 +27,7 @@ The `tests` subfolder contains several examples that show the basic usage of Ris
 
 * J. González, J. Ortega, M. Damas, P. Martín-Smith, J. Q. Gan. *A new multi-objective wrapper method for feature selection – Accuracy and stability analysis for BCI*, **Neurocomputing**, 333:407-418, 2019. https://doi.org/10.1016/j.neucom.2019.01.017
 * J. González, J. Ortega, M. Damas, P. Martín-Smith. *Many-Objective Cooperative Co-evolutionary Feature Selection: A Lexicographic Approach*.  In: I. Rojas, G. Joya, A. Catala (eds) **Advances in Computational Intelligence. IWANN 2019**. Lecture Notes in Computer Science, vol 11507. Springer, Cham. https://doi.org/10.1007/978-3-030-20518-8_39
-* J. González, J. Ortega, J. J. Escobar, M. Damas. *A Lexicographic Cooperative Co-Evolutionary Approach for Feature Selection*, **Neurocomputing**, in press. https://doi.org/10.1016/j.neucom.2021.08.003
+* J. González, J. Ortega, J. J. Escobar, M. Damas. *A Lexicographic Cooperative Co-Evolutionary Approach for Feature Selection*, **Neurocomputing**, 463:59-76, 2021. https://doi.org/10.1016/j.neucom.2021.08.003
 
 ## Acknowledgments
 
