@@ -36,7 +36,7 @@ DOCTITLE = 'Ristretto API'
 HEADER = '<b>Ristretto API'
 BOTTOM = '<font size="-1"><div align=right> \
            Copyright &copy; 2016-2018 <a \
-           href="https://atcproyectos.ugr.es/efficomp/">EFFICOMP</a>. \
+           href="https://efficomp.ugr.es">EFFICOMP</a>. \
            All rights reserved. <br><br>\
           </div><div align=justify> \
            This work was supported by project <i>Energy-aware High Performance \
